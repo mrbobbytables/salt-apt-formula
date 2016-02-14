@@ -1,6 +1,7 @@
 ===
 Apt
 ===
+.. image:: https://travis-ci.org/mrbobbytables/salt-apt-formula.svg?branch=master
 
 Formula for managing apt and it's associated transports.
 
