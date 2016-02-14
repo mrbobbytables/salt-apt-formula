@@ -1,0 +1,68 @@
+---
+driver:
+  name: docker
+  binary: docker
+  use_sudo: false
+
+provisioner:
+  name: salt_solo
+  formula: apt
+  salt_install: bootstrap
+  state_top_from_file: true
+  pillars-from-files:
+    apt.sls: pillar.example
+  pillars:
+    top.sls:
+      base:
+        '*':
+          - apt
+
+platforms:
+  - name: debian-wheezy
+    driver_config:
+      image: debian:wheezy
+      platform: debian
+
+  - name: debian-jessie
+    driver_config:
+      image: debian:jessie
+      platform: debian
+     
+  - name: ubuntu-precise
+    driver_config:
+      image: ubuntu:precise
+      platform: ubuntu
+
+  - name: ubuntu-trusty
+    driver_config:
+      image: ubuntu:trusty
+      platform: ubuntu
+
+  - name: ubuntu-vivid
+    driver_config:
+      image: ubuntu:vivid
+      platform: ubuntu
+    provisioner:
+      salt_install: ppa
+
+  - name: ubuntu-wily
+    driver_config:
+      image: ubuntu:wily
+      platform: ubuntu
+    provisioner:
+      salt_install: ppa
+
+
+  - name: ubuntu-xenial
+    driver_config:
+      image: ubuntu:xenial
+      platform: ubuntu
+    provisioner:
+      salt_install: ppa
+
+
+
+suites:
+  - name: apt
+
+

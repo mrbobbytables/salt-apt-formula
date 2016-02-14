@@ -1,0 +1,3 @@
+{% import_yaml 'apt/defaults.yml' as defaults %}
+
+{% set apt_settings = salt['pillar.get']('apt:lookup', default=defaults.apt, merge=True) %}

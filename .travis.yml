@@ -1,0 +1,30 @@
+language: ruby
+rvm: 
+  - 2.2.1
+
+sudo: required
+services: 
+  - docker
+
+env:
+  matrix:
+    - INSTANCE=apt-debian-wheezy
+    - INSTANCE=apt-debian-jessie
+    - INSTANCE=apt-ubuntu-precise
+    - INSTANCE=apt-ubuntu-trusty
+    - INSTANCE=apt-ubuntu-vivid
+    - INSTANCE=apt-ubuntu-wily
+    - INSTANCE=apt-ubuntu-xenial
+
+before_install: 
+  - curl -L https://www.getchef.com/chef/install.sh | sudo bash -s -- -P chefdk -v 0.10.0
+
+install: 
+  - chef exec bundle install
+
+before_script: 
+  - sudo iptables -L DOCKER || sudo iptables -N DOCKER
+
+script:
+  - chef exec bundle exec kitchen verify ${INSTANCE}
+

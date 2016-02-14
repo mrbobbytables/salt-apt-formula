@@ -1,0 +1,6 @@
+{%- from 'apt/map.jinja' import apt_settings with context -%}
+{%- for param in apt_settings.config.get(conf_lookup).params -%}
+{{ param.name }} { {% for opt in param.value %}
+"{{ opt }}"; {% endfor %}
+};
+{% endfor %}

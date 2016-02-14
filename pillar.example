@@ -1,0 +1,25 @@
+apt:
+  lookup:
+    unattended_upgrades: true
+    ppa: true
+    transports:
+      - https
+    config:
+      50unattended-upgrades:
+        mode: create
+        params:
+          - name: Unattended-Upgrade::Allowed-Origins
+            value:
+              - ${distro_id}:${distro_codename}-security
+      99timeout:
+        mode: create
+        params:
+          - name: Acquire:ftp::Timeout
+            value:
+              - 10
+          - name: Acquire::http::Timeout
+            value:
+              - 10
+          - name: Acquire::https::Timeout
+            value:
+              - 10
